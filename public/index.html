@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pulse - Fitness Tracker</title>
+  <meta name="description" content="Log your steps, water, sleep and workouts, then watch your weekly progress.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%235b5bf0'/%3E%3Cpath d='M12 55h20l10-26 16 44 10-18h20' fill='none' stroke='white' stroke-width='8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Shown when nobody is logged in -->
+  <main id="auth-view" class="auth" hidden>
+    <section class="auth-card">
+      <div class="brand"><span class="brand-mark">♥</span> Pulse</div>
+      <h1>Small habits, <span class="grad">big progress.</span></h1>
+      <p class="muted">Track your steps, water, sleep and workouts in one calm place.</p>
+
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-mode="login" role="tab">Log in</button>
+        <button class="tab" data-mode="signup" role="tab">Sign up</button>
+      </div>
+
+      <form id="auth-form" novalidate>
+        <label class="field" id="name-field" hidden>
+          <span>Your name</span>
+          <input name="name" type="text" autocomplete="name" maxlength="40" placeholder="Ama">
+        </label>
+        <label class="field">
+          <span>Email</span>
+          <input name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+        </label>
+        <label class="field">
+          <span>Password</span>
+          <input name="password" type="password" autocomplete="current-password" minlength="8" placeholder="At least 8 characters" required>
+        </label>
+        <p id="auth-error" class="form-error" role="alert" hidden></p>
+        <button class="btn primary block" type="submit" id="auth-submit">Log in</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Shown after logging in -->
+  <div id="app-view" hidden>
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">♥</span> Pulse</div>
+      <div class="topbar-right">
+        <span id="greeting" class="muted"></span>
+        <button class="btn ghost" id="logout-btn">Log out</button>
+      </div>
+    </header>
+
+    <main class="container">
+      <section>
+        <div class="section-head">
+          <h2>Today</h2>
+          <span id="today-label" class="muted"></span>
+        </div>
+        <div id="today-cards" class="cards"></div>
+      </section>
+
+      <section class="panel">
+        <h2>Log activity</h2>
+        <form id="log-form" class="log-form" novalidate>
+          <label class="field">
+            <span>What did you do?</span>
+            <select name="type" id="log-type"></select>
+          </label>
+          <label class="field">
+            <span>Amount <em id="unit-hint" class="muted"></em></span>
+            <input name="value" type="number" inputmode="decimal" step="any" min="0" placeholder="0" required>
+          </label>
+          <label class="field">
+            <span>Date</span>
+            <input name="date" type="date" required>
+          </label>
+          <label class="field grow">
+            <span>Note (optional)</span>
+            <input name="note" type="text" maxlength="100" placeholder="Morning jog in the park">
+          </label>
+          <button class="btn primary" type="submit">Add entry</button>
+        </form>
+        <p id="log-error" class="form-error" role="alert" hidden></p>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <h2>Weekly progress</h2>
+          <div class="segmented" id="range-picker" role="group" aria-label="Date range">
+            <button data-days="7" class="active">7 days</button>
+            <button data-days="14">14 days</button>
+            <button data-days="30">30 days</button>
+          </div>
+        </div>
+        <div id="stats" class="stats"></div>
+        <div id="charts" class="charts"></div>
+      </section>
+
+      <section class="panel">
+        <h2>Recent entries</h2>
+        <ul id="log-list" class="log-list"></ul>
+        <p id="log-empty" class="muted empty" hidden>Nothing logged yet. Add your first entry above, or tap a quick-add button.</p>
+      </section>
+    </main>
+  </div>
+
+  <div id="toasts" class="toasts" aria-live="polite"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
