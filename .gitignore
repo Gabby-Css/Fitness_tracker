@@ -1,0 +1,23 @@
+# dependencies (anyone can recreate this folder with `npm install`)
+node_modules/
+
+# secrets: your real passwords and settings live here, NEVER commit them
+.env
+.env.*
+!.env.example
+
+# local databases (they hold real data: emails, password hashes, sessions)
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+
+# logs
+*.log
+npm-debug.log*
+
+# editor / OS clutter
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

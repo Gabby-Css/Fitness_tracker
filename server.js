@@ -1,4 +1,8 @@
 // server.js - the Express API for the fitness tracker.
+// Load settings (PORT, passwords...) from the private .env file before anything else reads them.
+// On a host like Render there is no .env file: the host's own environment variables are used instead.
+require('dotenv').config();
+
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
